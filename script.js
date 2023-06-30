@@ -70,7 +70,7 @@ dashs.addEventListener("click", (e) => {
 
 const loadData = () => {
   const mainContentDiv = document.querySelector("#mainContent");
-  fetch("https://dummyjson.com/products")
+  fetch("https://dummyjson.com/products?limit=0")
     .then((res) => res.json())
     .then((json) =>
       json.products.map((el) => {
@@ -78,7 +78,8 @@ const loadData = () => {
         mainContentDiv.innerHTML += `
         <div class="card border-0 shadow mb-5" style="width: 18rem">
           <img
-            src="${el.images[0]}"
+            loading="lazy"
+            src="${el.thumbnail}"
             class="border-0 p-2"
             alt=""
             style="height: 15rem !important"
