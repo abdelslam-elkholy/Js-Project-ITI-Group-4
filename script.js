@@ -92,10 +92,10 @@ const loadData = () => {
             </p>
             <div class="text-center fw-bold link-danger mb-2">${el.price} $</div>
             <div class="d-flex justify-content-between mt-auto">
-              <a href="" class="btn btn-warning">
+              <button href="" class="btn btn-warning" onclick="openSingleProductPage(${el.id})" >
                 View More
-              </a>
-              <button class="btn btn-success" onclick="openSingleProductPage(${el.id})"  >Add to cart</button>
+              </button>
+              <button class="btn btn-success"  >Add to cart</button>
             </div>
           </div>
         </div>
