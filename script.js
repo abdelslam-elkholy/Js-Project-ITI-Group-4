@@ -70,6 +70,7 @@ dashs.addEventListener("click", (e) => {
 
 const loadData = () => {
   const mainContentDiv = document.querySelector("#mainContent");
+
   fetch("https://dummyjson.com/products?limit=0")
     .then((res) => res.json())
     .then((json) =>
@@ -94,7 +95,7 @@ const loadData = () => {
               <a href="" class="btn btn-warning">
                 View More
               </a>
-              <button class="btn btn-success">Add to cart</button>
+              <button class="btn btn-success" >Add to cart</button>
             </div>
           </div>
         </div>
