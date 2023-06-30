@@ -95,13 +95,19 @@ const loadData = () => {
               <a href="" class="btn btn-warning">
                 View More
               </a>
-              <button class="btn btn-success" >Add to cart</button>
+              <button class="btn btn-success" onclick="openSingleProductPage(${el.id})"  >Add to cart</button>
             </div>
           </div>
         </div>
       `;
       })
     );
+};
+
+const openSingleProductPage = async (id) => {
+  const date = new Date().getTime() + 3;
+  document.cookie = `productId = ${id} ; expires = ${date}`;
+  location.href = "./singleProductPage.html";
 };
 
 loadData();
