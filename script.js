@@ -87,16 +87,25 @@ const loadData = () => {
           />
           <div class="card-body d-flex flex-column justify-content-between">
             <h5 class="card-title">${el.title}</h5>
-            <p class="card-text">
-          ${el.description}
+            <p class="card-text " style = "height : 6rem !important">
+          ${
+            el.description.length > 100
+              ? el.description.slice(0, 100) + "..."
+              : el.description
+          }
             </p>
-            <div class="text-center fw-bold link-danger mb-2">${el.price} $</div>
+            <div class=" fw-bold  m-3">${el.price} $</div>
             <div class="d-flex justify-content-between mt-auto">
-              <button href="" class="btn btn-warning" onclick="openSingleProductPage(${el.id})" >
-                View More
+              <button href="" class="btn btn-warning" onclick="openSingleProductPage(${
+                el.id
+              })" >
+                Add To Cart
               </button>
-              <button class="btn btn-success"  >Add to cart</button>
+              <span class=" bg-success link-light p-2 rounded">${el.rating.toFixed(
+                1
+              )}</span>
             </div>
+            
           </div>
         </div>
       `;
@@ -113,3 +122,18 @@ const openSingleProductPage = (id) => {
 
 // Fire The Function When Load
 loadData();
+
+/*
+
+`
+        <div class="item">
+          <img src="${el.thumbnail}" alt="el.title" class="item-img" />
+          <div class="item-name">${el.title}</div>
+          <div class="item-details">
+            <span class="item-spec">Price</span>
+            <span class="item-price">${el.price}$</span>
+          </div>
+          <button class="item-add btn btn-warning">Add To Cart</button>
+        </div>`;
+      })
+*/

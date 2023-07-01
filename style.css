@@ -1,3 +1,21 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Nunito", sans-serif;
+  font-weight: 300;
+  line-height: 1.6;
+}
+
 .slider {
   max-width: 100rem;
   height: 40rem;
@@ -74,4 +92,70 @@
 .dashs-dash-active {
   background-color: #fff;
   opacity: 1;
+}
+
+.item {
+  font-size: 10px !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgba(211, 205, 205, 0.137);
+  box-shadow: 0 1rem 2.5rem rgba(0, 0, 0, 0.212);
+  /* height: 50rem;*/
+  max-width: 35rem;
+  margin: 2rem;
+}
+.item-img {
+  height: 25rem;
+  width: 30rem;
+  margin-top: 2rem;
+}
+
+.item-name {
+  /* height: rem;
+  width: 8rem; */
+  /* background-color: var(--Color-blue); */
+  color: black;
+  font-size: 2rem;
+  text-align: center;
+  margin: 2rem;
+  /* border-radius: 1000px; */
+  padding: 1rem;
+  box-sizing: content-box;
+}
+.item-details {
+  border: 1px solid rgba(211, 205, 205, 0.137);
+  font-size: 2.5rem;
+  color: rgba(0, 0, 0, 0.466);
+  display: flex;
+  justify-content: space-between;
+}
+.item-spec {
+  display: block;
+  margin-right: 5rem;
+}
+.item-price {
+  display: block;
+}
+.item-add {
+  margin-bottom: 3rem;
+  cursor: pointer;
+  border: none;
+  padding: 1rem;
+  font-size: 2rem;
+  margin-top: 3.5rem;
+  color: black;
+  /* background-color: var(--Color-blue); */
+  /* background-color: rgb(41, 39, 39); */
+  transition: all 0.2s;
+}
+.item-add:hover {
+  /* background-color: #2b78ac; */
+  /* background-color: rgb(199, 187, 23); */
+  color: black;
+  transform: scale(1.2);
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.329);
+}
+.item-add:active {
+  transform: translateY(-0.5rem);
 }
