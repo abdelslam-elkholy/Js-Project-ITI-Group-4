@@ -86,7 +86,14 @@ const loadData = () => {
             style="height: 15rem !important"
           />
           <div class="card-body d-flex flex-column justify-content-between">
-            <h5 class="card-title">${el.title}</h5>
+            <h5 class="card-title" style="cursor:pointer" onclick="openSingleProductPage(${
+              el.id
+            })"> 
+           
+            
+            ${el.title}
+              
+        </h5>
             <p class="card-text " style = "height : 6rem !important">
           ${
             el.description.length > 100
@@ -96,14 +103,12 @@ const loadData = () => {
             </p>
             <div class=" fw-bold  m-3">${el.price} $</div>
             <div class="d-flex justify-content-between mt-auto">
-              <button href="" class="btn btn-warning" onclick="openSingleProductPage(${
-                el.id
-              })" >
+              <button href="" class="btn btn-warning"  >
                 Add To Cart
               </button>
-              <span class=" bg-success link-light p-2 rounded">${el.rating.toFixed(
-                1
-              )}</span>
+              <span class=" bg-success link-light p-2 rounded">
+              <i class="fa-solid fa-star"></i>
+              ${el.rating.toFixed(1)}</span>
             </div>
             
           </div>
