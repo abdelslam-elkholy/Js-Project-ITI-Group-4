@@ -68,9 +68,9 @@ dashs.addEventListener("click", (e) => {
   }
 });
 
+// Function to Get Data From API and Append It to Main
 const loadData = () => {
   const mainContentDiv = document.querySelector("#mainContent");
-
   fetch("https://dummyjson.com/products?limit=0")
     .then((res) => res.json())
     .then((json) =>
@@ -104,10 +104,12 @@ const loadData = () => {
     );
 };
 
-const openSingleProductPage = async (id) => {
+// To Get The Id Of a Product When Click On it And open Single Product Page
+const openSingleProductPage = (id) => {
   const date = new Date().getTime() + 3;
   document.cookie = `productId = ${id} ; expires = ${date}`;
   location.href = "./singleProductPage.html";
 };
 
+// Fire The Function When Load
 loadData();
