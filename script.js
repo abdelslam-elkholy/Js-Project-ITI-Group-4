@@ -72,7 +72,6 @@ dashs.addEventListener("click", (e) => {
 
 const loadData = (param) => {
   // load Categories Menue
-  getCategories();
 
   // Main Content Div
   const mainContentDiv = document.querySelector("#mainContent");
@@ -130,7 +129,7 @@ const loadData = (param) => {
 const getCategories = () => {
   const categoriesContainer = document.querySelector(".categories");
   categoriesContainer.innerHTML = `
-        <li class="nav-item">
+        <li class="nav-item btn btn-warning m-1 rounded">
          <a class="nav-link 
           text-dark" href="#"
           onclick="loadData('products?limit=0')"
@@ -145,7 +144,7 @@ const getCategories = () => {
       json.map(
         (cat) =>
           (categoriesContainer.innerHTML += ` 
-            <li class="nav-item">
+            <li class="nav-item btn btn-warning m-1 rounded" >
               <a class="nav-link text-dark" href="#" 
               onclick="loadData('products/category/${cat}')">
               ${cat}
@@ -164,3 +163,4 @@ const openSingleProductPage = (id) => {
 
 // Fire The Function When Load
 loadData("products?limit=0");
+getCategories();
