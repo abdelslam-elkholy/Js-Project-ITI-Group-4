@@ -3,7 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <link rel="icon" href="https://f.nooncdn.com/s/app/com/noon/icons/favicon_yellow.ico">
+    <title>Online Shopping Egypt | Fashion, Electronics, Beauty, Baby | noon</title>
     <!-- <link rel="stylesheet" href="main.css" /> -->
     <link
       rel="stylesheet"
@@ -132,7 +133,7 @@
               </form>
               <ul class="nav justify-content-end"></ul>
               <li class="nav-item myItems">
-                <a class="nav-link fw-bold" aria-current="page" href="#"
+                <a class="nav-link fw-bold open" aria-current="page" href="#"
                   >Sign In <img class="iconImg" src="./user (1).png" alt="user"
                 /></a>
               </li>
@@ -148,6 +149,78 @@
       </nav>
     </header>
 
+    <!-- Start Forms -->
+
+    <div class="wrapper">
+      <span class="icon-close" >
+        <i class="fa-solid fa-xmark"></i>
+      </span>
+      <div class="form-box login">
+        <h4>Welcome back!</h4>
+        <h3>Sign in to your account</h3>
+        <div class="login-register">
+            <p>Don't have an account?<a href="#" class="register-link"> Sign Up</a></p>
+        </div>
+        <form action="#" class="login-form">
+          <div class="input-box">
+              <input id="email" class="email" type="email">
+              <label for="email">Email</label>
+              <div class="error"></div>
+          </div>
+          <div class="input-box">
+              <input id="password" class="password" type="password">
+              <label for="password">Password</label>
+              <div class="error"></div>
+          </div>
+          <div class="input-box">
+              <input id="user" type="text">
+              <label for="user">Name</label>
+              <div class="error"></div>
+          </div>
+          <div class="remember-forget">
+            <a href="#">Forget your password?</a>
+          </div>
+          <button type="submit" class="btn1">SIGN IN</button>
+        </form>
+        <!-- <div id="errorContainer" style="display: none; text-align: center;"></div> -->
+      </div>
+
+      <div class="form-box register">
+        <h3>Create an account</h3>
+        <div class="login-register">
+            <p>Already have an account?<a href="#" class="login-link"> Sign In</a></p>
+        </div>
+        <form action="#" class="register-form">
+          <div class="input-box">
+              <input id="email1" class="email" type="email">
+              <label for="email1">Email</label>
+              <div class="error"></div>
+          </div>
+          <div class="input-box">
+              <input id="password1" class="password"  type="password">
+              <label for="password1">Password</label>
+              <div class="error"></div>
+          </div>
+          <div class="input-box">
+              <input id="name1" class="name" type="text">
+              <label for="name1">Name</label>
+              <div class="error"></div>
+          </div> 
+          <button type="submit" class="btn1">CREATE AN ACCOUNT</button>
+        </form>
+        <div id="errorContainer" style="display: none; text-align: center;"></div>
+        <div id="successContainer" style="display: none; text-align: center;"></div>
+      </div>
+    </div>
+    <div class="overlay hidden"></div>
+
+    <!-- End Forms -->
+
+    <!-- image -->
+    <div class="img-noon"></div>
+
+    <!-- Start Slider -->
+
     <div class="slider">
       <div class="slide"><img src="images/1.png" alt="image1" /></div>
       <div class="slide"><img src="images/2.png" alt="image2" /></div>
@@ -160,6 +233,9 @@
       <button class="slider-btn btn-right">&rarr;</button>
       <div class="dashs"></div>
     </div>
+    
+    <!-- End Slider -->
+
 
     <ul class="categories nav nav-tabs u12"></ul>
     <main
