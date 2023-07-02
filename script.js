@@ -199,7 +199,6 @@ btnClose.addEventListener("click", closeModal);
 
 overlay.addEventListener("click", closeModal);
 
-
 // ----------- Slider -------------
 
 const imgNoon = document.querySelector(".img-noon");
@@ -262,11 +261,18 @@ const prevSlide = () => {
   activeDash(curSlide);
 };
 
-setInterval(nextSlide, 3000);
+const mySildeShow = setInterval(nextSlide, 3000);
 
 //Event handler
-btnRight.addEventListener("click", nextSlide);
-btnLeft.addEventListener("click", prevSlide);
+btnRight.addEventListener("click", () => {
+  clearInterval(mySildeShow);
+  nextSlide();
+});
+btnLeft.addEventListener("click", () => {
+  clearInterval(mySildeShow);
+  prevSlide();
+});
+
 dashs.addEventListener("click", (e) => {
   if (e.target.classList.contains("dashs-dash")) {
     // console.log('dash')
