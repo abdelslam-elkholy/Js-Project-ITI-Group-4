@@ -363,7 +363,7 @@ const getCategories = async () => {
             <li class="nav-item" >
               <a class="nav-link " href="#categories"
                 onclick="loadData('products/category/${cat}');changeActive()">
-                ${cat}
+                ${cat.toUpperCase()}
               </a>
            </li>`)
   );

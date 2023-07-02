@@ -281,11 +281,11 @@ body {
 .show {
   display: block;
 }
-
+/* 
 .nav-tabs {
   overflow-x: auto;
   white-space: nowrap;
 }
 .nav-tabs .nav-item {
   flex: 0 0 auto;
-}
+} */
