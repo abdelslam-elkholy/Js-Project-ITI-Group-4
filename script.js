@@ -45,7 +45,7 @@ const displaySuccess = (successMessage) => {
 const checkLoggedIn = () => {
   let isLoggedIn = JSON.parse(localStorage.getItem("isLoggedIn"));
 
-  if(isLoggedIn == true){
+  if (isLoggedIn == true) {
     let loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
     console.log(loggedInUser);
     btnOpen.innerHTML = `<span>Welcome ${loggedInUser.username} 🎉</span>
@@ -55,10 +55,10 @@ const checkLoggedIn = () => {
 checkLoggedIn();
 
 const signOut = () => {
-  localStorage.setItem("loggedInUser", JSON.stringify(''));
+  localStorage.setItem("loggedInUser", JSON.stringify(""));
   localStorage.setItem("isLoggedIn", JSON.stringify(false));
   location.reload();
-}
+};
 
 loginForm.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -86,7 +86,6 @@ loginForm.addEventListener("submit", (e) => {
     localStorage.setItem("loggedInUser", JSON.stringify(user));
     localStorage.setItem("isLoggedIn", JSON.stringify(true));
     checkLoggedIn();
-
   } else {
     errorContainer.textContent = "Invaild name or password";
     return;
@@ -350,11 +349,10 @@ const loadData = async (param) => {
 const getCategories = async () => {
   const categoriesContainer = document.querySelector(".categories");
   categoriesContainer.innerHTML = `
-        <li class="nav-item btn btn-warning m-1 rounded">
-         <a class="nav-link text-dark" href="#"
-          onclick="loadData('products?limit=0')">
-          ALL CATOGARIES &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-         </a>
+        <li class="nav-item">
+          <a class="nav-link active" href="#category"onclick="loadData('products?limit=0')">
+           ALL CATOGARIES &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+          </a>
         </li>`;
 
   const res = await getData("products/categories");
@@ -362,13 +360,31 @@ const getCategories = async () => {
   res.map(
     (cat) =>
       (categoriesContainer.innerHTML += ` 
-            <li class="nav-item btn btn-warning m-1 rounded" >
-              <a class="nav-link text-dark" href="#" 
-              onclick="loadData('products/category/${cat}')">
-              ${cat}
+            <li class="nav-item" >
+              <a class="nav-link " href="#categories"
+                onclick="loadData('products/category/${cat}');changeActive()">
+                ${cat}
               </a>
            </li>`)
   );
+};
+/*
+onclick=" changeActive()"
+*/
+const changeActive = function () {
+  console.log("im working");
+  const paginationLinks = document.querySelectorAll(".nav-tabs .nav-link");
+  paginationLinks.forEach(function (link) {
+    link.addEventListener("click", function (event) {
+      event.preventDefault();
+      console.log("im working");
+      paginationLinks.forEach(function (link) {
+        link.classList.remove("active");
+      });
+
+      this.classList.add("active");
+    });
+  });
 };
 
 //Search

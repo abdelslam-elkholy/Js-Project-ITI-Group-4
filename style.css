@@ -35,8 +35,8 @@ body {
   opacity: 0;
 }
 
-.wrapper{
-  position:fixed;
+.wrapper {
+  position: fixed;
   top: 5%;
   left: 35%;
   transform: translate(-50%, -50%);
@@ -55,7 +55,7 @@ body {
   transform: scale(0);
 }
 
-.wrapper.active-btn{
+.wrapper.active-btn {
   transform: scale(1);
 }
 
@@ -63,65 +63,66 @@ body {
   height: 520px;
 } */
 
-.wrapper .icon-close{
+.wrapper .icon-close {
   position: absolute;
   top: 0;
   right: 0;
   width: 30px;
-  height: 30px; 
+  height: 30px;
   font-size: 1.5em;
   font-weight: bolder;
   cursor: pointer;
 }
-.wrapper .form-box{
+.wrapper .form-box {
   width: 100%;
   padding: 40px;
 }
 
 .wrapper .form-box.login {
-  transition: transform .18s ease;
+  transition: transform 0.18s ease;
   transform: translateX((0));
 }
 
-.wrapper.active .form-box.login{
+.wrapper.active .form-box.login {
   transition: none;
   transform: translateX(-400px);
 }
 
-.wrapper .form-box.register{
+.wrapper .form-box.register {
   position: absolute;
   transition: none;
   transform: translateX(400px);
 }
 
-.wrapper.active .form-box.register{
-  transition: transform .18s ease;
+.wrapper.active .form-box.register {
+  transition: transform 0.18s ease;
   transform: translateX(0);
 }
 
-.form-box h4, .form-box h3{
+.form-box h4,
+.form-box h3 {
   font-size: 1.5em;
   color: rgb(64, 69, 83);
   text-align: center;
 }
-.login-register{
+.login-register {
   text-align: center;
   font-size: 1em;
 }
 
-.login-register p a{
+.login-register p a {
   text-decoration: none;
 }
 
-.input-box{
-  position:relative; 
+.input-box {
+  position: relative;
   width: 100%;
   height: 50px;
   border-bottom: 2px solid rgba(235, 237, 245, 1);
   margin: 30px 0;
-} 
+}
 
-.input-box.error{
+.input-box.error {
   border-bottom: 4px solid red;
 }
 
@@ -131,8 +132,8 @@ body {
   color: red;
 } */
 
-.input-box label{
-  position:absolute;
+.input-box label {
+  position: absolute;
   top: 50%;
   left: 5px;
   transform: translateY(-50%);
@@ -140,11 +141,11 @@ body {
   pointer-events: none;
   transition: all 0.3s;
 }
-.input-box input:focus~label,
-.input-box input:valid~label{
+.input-box input:focus ~ label,
+.input-box input:valid ~ label {
   top: -5px;
 }
-.input-box input{
+.input-box input {
   width: 100%;
   height: 100%;
   background: transparent;
@@ -153,18 +154,17 @@ body {
   /* padding: 0 35px 0 5px; */
 }
 
-.remember-forget{
+.remember-forget {
   font-size: 1em;
   /* margin: -15px 0 15px; */
 }
 
-.remember-forget a{
+.remember-forget a {
   text-decoration: none;
   margin-left: 50px;
-
 }
 
-.btn1{
+.btn1 {
   width: 100%;
   height: 45px;
   border: none;
@@ -280,4 +280,12 @@ body {
 
 .show {
   display: block;
+}
+
+.nav-tabs {
+  overflow-x: auto;
+  white-space: nowrap;
+}
+.nav-tabs .nav-item {
+  flex: 0 0 auto;
 }
