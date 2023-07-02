@@ -11,7 +11,7 @@ const btnClose = document.querySelector(".icon-close");
 const inputBoxs = document.querySelectorAll(".input-box");
 const loginForm = document.querySelector(".login-form");
 const registrationForm = document.querySelector(".register-form");
-const errorContainer = document.getElementById("errorContainer");
+// const errorContainer = document.getElementById("errorContainer");
 const successContainer = document.getElementById("successContainer");
 
 const isValidEmail = (email) => {
@@ -29,16 +29,17 @@ const isValidName = (userName) => {
   return usernameRegex.test(userName);
 };
 
-const displayError = (errorMessage) => {
+const displayError = (errorContainer, errorMessage) => {
   errorContainer.style.display = "block";
   errorContainer.style.color = "red";
   errorContainer.textContent = errorMessage;
 };
-const displaySuccess = (successMessage) => {
-  successContainer.style.display = "block";
-  successContainer.style.color = "green";
-  successContainer.textContent = successMessage;
-};
+// };
+// const displaySuccess = (successMessage) => {
+//   successContainer.style.display = "block";
+//   successContainer.style.color = "green";
+//   successContainer.textContent = successMessage;
+// };
 
 loginForm.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -112,22 +113,31 @@ loginForm.addEventListener("submit", (e) => {
   loginForm.submit();
 });
 
+const regEmail = document.getElementById("email1");
+
+const validateEmail = () => {
+  const errDiv = document.querySelector(".error-email");
+
+  if (regEmail.value === "") {
+    displayError(errDiv, "Email field is required!");
+    return;
+  }
+
+  if (!isValidEmail(regEmail.value)) {
+    displayError(errDiv, "Invalid email address!");
+    return;
+  } else {
+    errDiv.textContent = "";
+    return true;
+  }
+};
+regEmail.addEventListener("input", validateEmail);
+
 registrationForm.addEventListener("submit", (e) => {
   e.preventDefault();
 
-  const regEmail = document.getElementById("email1").value;
   const regPassword = document.getElementById("password1").value;
   const regUserName = document.getElementById("name1").value;
-
-  if (regEmail === "") {
-    displayError("Email field is required!");
-    return;
-  }
-
-  if (!isValidEmail(regEmail)) {
-    displayError("Invalid email address!");
-    return;
-  }
 
   if (regPassword === "") {
     displayError("Password field is required!");
