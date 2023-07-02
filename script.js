@@ -144,6 +144,12 @@ const getCategories = async () => {
   );
 };
 
+//Search
+const searchProducts = async () => {
+  const searchValue = document.querySelector(".inpt-search").value;
+  const res = await getData(`products/search?q=${searchValue}`);
+  console.log(res);
+};
 // To Get The Id Of a Product When Click On it And open Single Product Page
 const openSingleProductPage = (id) => {
   const date = new Date().getTime() + 3;
@@ -154,3 +160,7 @@ const openSingleProductPage = (id) => {
 // Fire The Function When Load
 loadData("products?limit=0");
 getCategories();
+
+document
+  .querySelector(".inpt-search")
+  .addEventListener("input", searchProducts);
