@@ -168,20 +168,16 @@
             Don't have an account?<a href="#" class="register-link"> Sign Up</a>
           </p>
         </div>
-        <form action="#" class="login-form">
-          <div class="input-box">
-            <input id="email" class="email" type="email" />
-            <label for="email">Email</label>
-            <div class="error"></div>
-          </div>
-          <div class="input-box">
-            <input id="password" class="password" type="password" />
-            <label for="password">Password</label>
-            <div class="error"></div>
-          </div>
+        <form action="#" class="login-form"> 
           <div class="input-box">
             <input id="user" type="text" />
             <label for="user">Name</label>
+            <div class="error"></div>
+          </div>
+
+          <div class="input-box">
+            <input id="password" class="password" type="password" />
+            <label for="password">Password</label>
             <div class="error"></div>
           </div>
           <div class="remember-forget">
@@ -189,7 +185,8 @@
           </div>
           <button type="submit" class="btn1">SIGN IN</button>
         </form>
-        <!-- <div id="errorContainer" style="display: none; text-align: center;"></div> -->
+        <div id="errorContainer" style="color:red; text-align: center;"></div>
+        <div id="successLogin" style="display: none; color:green; text-align: center;"></div>
       </div>
 
       <div class="form-box register">
@@ -208,13 +205,12 @@
           <div class="input-box">
             <input id="password1" class="password" type="password" />
             <label for="password1">Password</label>
-            <div class="error"></div>
+            <div class="error-password"></div>
           </div>
           <div class="input-box">
             <input id="name1" class="name" type="text" />
-
             <label for="name1">Name</label>
-            <div class="error"></div>
+            <div class="error-name"></div>
           </div>
           <button type="submit" class="btn1">CREATE AN ACCOUNT</button>
         </form>

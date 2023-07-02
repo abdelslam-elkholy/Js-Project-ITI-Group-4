@@ -11,8 +11,9 @@ const btnClose = document.querySelector(".icon-close");
 const inputBoxs = document.querySelectorAll(".input-box");
 const loginForm = document.querySelector(".login-form");
 const registrationForm = document.querySelector(".register-form");
-// const errorContainer = document.getElementById("errorContainer");
+const errorContainer = document.getElementById("errorContainer");
 const successContainer = document.getElementById("successContainer");
+const successLogin = document.getElementById("successLogin");
 
 const isValidEmail = (email) => {
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -34,21 +35,40 @@ const displayError = (errorContainer, errorMessage) => {
   errorContainer.style.color = "red";
   errorContainer.textContent = errorMessage;
 };
-// };
-// const displaySuccess = (successMessage) => {
-//   successContainer.style.display = "block";
-//   successContainer.style.color = "green";
-//   successContainer.textContent = successMessage;
-// };
+
+const displaySuccess = (successMessage) => {
+  successContainer.style.display = "block";
+  successContainer.style.color = "green";
+  successContainer.textContent = successMessage;
+};
+
+const checkLoggedIn = () => {
+  let isLoggedIn = JSON.parse(localStorage.getItem("isLoggedIn"));
+
+  if(isLoggedIn == true){
+    let loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+    console.log(loggedInUser);
+    btnOpen.innerHTML = `<span>Welcome ${loggedInUser.username} 🎉</span>
+                  <a style="text-decoration: none; color:red;" onclick="signOut()" href="#">Sign Out</a>`;
+  }
+};
+checkLoggedIn();
+
+const signOut = () => {
+  localStorage.setItem("loggedInUser", JSON.stringify(''));
+  localStorage.setItem("isLoggedIn", JSON.stringify(false));
+  location.reload();
+}
 
 loginForm.addEventListener("submit", (e) => {
   e.preventDefault();
 
-  const email = document.getElementById("email").value;
+  //const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
   const username = document.getElementById("user").value;
 
-  const users = JSON.parse(localStorage.getItem("users")) || [];
+  let users = [];
+  users = JSON.parse(localStorage.getItem("users"));
   console.log(typeof users);
 
   // const user = users.find(
@@ -64,56 +84,22 @@ loginForm.addEventListener("submit", (e) => {
 
   if (user) {
     localStorage.setItem("loggedInUser", JSON.stringify(user));
-    console.log("Login successful");
+    localStorage.setItem("isLoggedIn", JSON.stringify(true));
+    checkLoggedIn();
+
   } else {
-    console.log("Invaild");
+    errorContainer.textContent = "Invaild name or password";
+    return;
   }
 
-  // if (email === "") {
-  //   displayError("Email field is required!");
-  //   return;
-  // }
-
-  // // Perform additional validation on email format
-  // if (!isValidEmail(email)) {
-  //   displayError("Invalid email address!");
-  //   return;
-
-  //   // alert("Invalid email address!");
-  //   // return;
-  // }
-
-  // if (password === "") {
-  //   displayError("Password field is required!");
-  //   return;
-  //   // alert("Password field is required!");
-  //   // return;
-  // }
-
-  // if (!isValidPassword(password)) {
-  //   displayError("Invalid password!");
-  //   //alert("Invalid password!");
-  //   return;
-  // }
-
-  // if (username === "") {
-  //   displayError("Name field is required!");
-  //   //alert("Name field is required!");
-  //   return;
-  // }
-
-  // if (!isValidName(username)) {
-  //   displayError("Invalid name!");
-  //   //alert("Invalid name!");
-  //   return;
-  // }
-
   // If all validations pass, submit the form
-  alert("Form submitted successfully!");
   loginForm.submit();
+  closeModal();
 });
 
 const regEmail = document.getElementById("email1");
+const regPassword = document.getElementById("password1");
+const regUserName = document.getElementById("name1");
 
 const validateEmail = () => {
   const errDiv = document.querySelector(".error-email");
@@ -131,59 +117,76 @@ const validateEmail = () => {
     return true;
   }
 };
+
+const validatePassword = () => {
+  const errDiv = document.querySelector(".error-password");
+
+  if (regPassword.value === "") {
+    displayError(errDiv, "Password field is required!");
+    return;
+  }
+
+  if (!isValidPassword(regPassword.value)) {
+    displayError(errDiv, "Invalid password!");
+    return;
+  } else {
+    errDiv.textContent = "";
+    return true;
+  }
+};
+
+const validateName = () => {
+  const errDiv = document.querySelector(".error-name");
+  if (regUserName.value === "") {
+    displayError(errDiv, "Name field is required!");
+    return;
+  }
+
+  if (!isValidName(regUserName.value)) {
+    displayError(errDiv, "Invalid name!");
+    return;
+  } else {
+    errDiv.textContent = "";
+    return true;
+  }
+};
+
 regEmail.addEventListener("input", validateEmail);
+regPassword.addEventListener("input", validatePassword);
+regUserName.addEventListener("input", validateName);
 
 registrationForm.addEventListener("submit", (e) => {
   e.preventDefault();
 
-  const regPassword = document.getElementById("password1").value;
-  const regUserName = document.getElementById("name1").value;
-
-  if (regPassword === "") {
-    displayError("Password field is required!");
-    return;
-  }
-
-  if (!isValidPassword(regPassword)) {
-    displayError("Invalid password!");
-    return;
-  }
-
-  if (regUserName === "") {
-    displayError("Name field is required!");
-    return;
-  }
-
-  if (!isValidName(regUserName)) {
-    displayError("Invalid name!");
-    return;
-  }
-
-  const users = JSON.parse(localStorage.getItem("users")) || [];
-  // const isUserName = users.some((user) => user.userName === regUserName);
-  let isUserName = false;
-  for (let i = 0; i < users.length; i++) {
-    if (users[i].username === regUserName) {
-      isUserName = true;
-      break;
+  if (validatePassword() && validateName()) {
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+    // const isUserName = users.some((user) => user.userName === regUserName);
+    let isUserName = false;
+    for (let i = 0; i < users.length; i++) {
+      if (users[i].username === regUserName.value) {
+        isUserName = true;
+        break;
+      }
     }
-  }
-  if (isUserName) {
-    console.log("Username already logged in");
-  } else {
-    const newUser = {
-      username: regUserName,
-      password: regPassword,
-    };
-    users.push(newUser);
-    localStorage.setItem("users", JSON.stringify(users));
-    console.log("Registration successful");
-  }
+    if (isUserName) {
+      errorContainer.textContent = "Username already logged in";
+      return;
+    } else {
+      const newUser = {
+        username: regUserName.value,
+        password: regPassword.value,
+      };
+      users.push(newUser);
+      localStorage.setItem("users", JSON.stringify(users));
+    }
 
-  //alert("Form submitted successfully!");
-  displaySuccess("Form submitted successfully!");
-  registrationForm.submit();
+    displaySuccess("Form submitted successfully!");
+    registrationForm.submit();
+    setTimeout(closeModal, 4000);
+  }
 });
+
+// localStorage.clear();
 
 btnRegisterModal.addEventListener("click", () => {
   modal.classList.add("active");
