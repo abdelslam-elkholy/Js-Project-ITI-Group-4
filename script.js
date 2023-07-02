@@ -68,25 +68,20 @@ dashs.addEventListener("click", (e) => {
   }
 });
 
+// GEt Data
+const getData = (params) =>
+  fetch(`https://dummyjson.com/${params}`).then((res) => res.json());
+
 // Function to Get Data From API and Append It to Main
-
-const loadData = (param) => {
-  // load Categories Menue
-
-  // Main Content Div
+const loadData = async (param) => {
   const mainContentDiv = document.querySelector("#mainContent");
   mainContentDiv.innerHTML = "";
 
-  //Get Data From API
-  fetch(`https://dummyjson.com/${param}`)
-    .then((res) => res.json())
-    .then((json) => {
-      let res = json.products;
-      console.log(res);
-      //Loop Over Data And MAke A Card For Each Product
-      res.map((el) => {
-        // console.log(el);
-        mainContentDiv.innerHTML += `
+  let res = await getData(param);
+  console.log(res.products);
+
+  res.products.map((el) => {
+    mainContentDiv.innerHTML += `
         <div class="card border-0 shadow mb-5" style="width: 18rem">
         <img
         loading="lazy"
@@ -121,37 +116,32 @@ const loadData = (param) => {
         </div>
         </div>
         `;
-      });
-    });
+  });
 };
 
 // Get All Categories
-const getCategories = () => {
+const getCategories = async () => {
   const categoriesContainer = document.querySelector(".categories");
   categoriesContainer.innerHTML = `
         <li class="nav-item btn btn-warning m-1 rounded">
-         <a class="nav-link 
-          text-dark" href="#"
-          onclick="loadData('products?limit=0')"
-          >
+         <a class="nav-link text-dark" href="#"
+          onclick="loadData('products?limit=0')">
           ALL CATOGARIES &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
          </a>
         </li>`;
 
-  fetch("https://dummyjson.com/products/categories")
-    .then((res) => res.json())
-    .then((json) =>
-      json.map(
-        (cat) =>
-          (categoriesContainer.innerHTML += ` 
+  const res = await getData("products/categories");
+
+  res.map(
+    (cat) =>
+      (categoriesContainer.innerHTML += ` 
             <li class="nav-item btn btn-warning m-1 rounded" >
               <a class="nav-link text-dark" href="#" 
               onclick="loadData('products/category/${cat}')">
               ${cat}
               </a>
            </li>`)
-      )
-    );
+  );
 };
 
 // To Get The Id Of a Product When Click On it And open Single Product Page
