@@ -11,8 +11,8 @@ const loadSingleProductData = async () => {
   );
   console.log(product);
 
-  const bod = document.querySelector("#singleProductPage");
-  bod.innerHTML = `
+  const body = document.querySelector("#singleProductPage");
+  body.innerHTML = `
   
       <div class="container-fluid mt-3 " style=" width: 33%; background-color:white;">
       <div class="ecommerce-gallery" data-mdb-zoom-effect="true" data-mdb-auto-height="true">
@@ -71,7 +71,8 @@ const loadSingleProductData = async () => {
           <i class="fa-solid fa-star"></i>
           ${product.rating.toFixed(1)}</span></p>
           <p class="price">Was:${product.price}</p>
-          <p class="lastprice">Now:${product.price-(product.price*((product.discountPercentage)/100))
+          <p class="lastprice">Now:${
+            product.price - product.price * (product.discountPercentage / 100)
           }</p>
           <p>Saving:<strong
               class="align-self-center text-lowercase badge  text-wrap fw-bolder fst-italic "
@@ -79,7 +80,9 @@ const loadSingleProductData = async () => {
               <img src="images/707dcf7e-9467-4bd9-8cfe-8d5ade48c8bd.png"width="100%">
               <p><b> Quantity</b></p>
               <input type="number" name="number" value="1" style="height: 40px; width: 4em;">
-              <button onclick="cart(${product.id},${document.getElementsByName("input").value} )" style="height: 40px; width: 85%; border: 0; background-color: rgb(44, 44, 249); color: #ffff; ">Add To Cart</button>
+              <button onclick="cart(${product.id},${
+    document.getElementsByName("input").value
+  } )" style="height: 40px; width: 85%; border: 0; background-color: rgb(44, 44, 249); color: #ffff; ">Add To Cart</button>
           </form>
             </div>
       <div class="container-fluid mt-3 " style=" width: 30%; background-color:white;">
