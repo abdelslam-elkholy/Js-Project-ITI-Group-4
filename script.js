@@ -368,9 +368,8 @@ const getCategories = async () => {
            </li>`)
   );
 };
-/*
-onclick=" changeActive()"
-*/
+
+// To Change The Activated Style Of Categories
 const changeActive = function () {
   console.log("im working");
   const paginationLinks = document.querySelectorAll(".nav-tabs .nav-link");
@@ -408,6 +407,7 @@ const searchProducts = async () => {
     let newOption = document.createElement("a");
     newOption.textContent = product.title;
     newOption.href = "#";
+    newOption.onclick = () => openSingleProductPage(product.id);
     dropDown.appendChild(newOption);
   });
 };
