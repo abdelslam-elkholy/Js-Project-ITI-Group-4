@@ -1,10 +1,229 @@
 "use strict";
 
+// ----------- Forms -------------
+
+const modal = document.querySelector(".wrapper");
+const btnLoginModal = document.querySelector(".login-link");
+const btnRegisterModal = document.querySelector(".register-link");
+const overlay = document.querySelector(".overlay");
+const btnOpen = document.querySelector(".open");
+const btnClose = document.querySelector(".icon-close");
+const inputBoxs = document.querySelectorAll(".input-box");
+const loginForm = document.querySelector(".login-form");
+const registrationForm = document.querySelector(".register-form");
+const errorContainer = document.getElementById("errorContainer");
+const successContainer = document.getElementById("successContainer");
+const successLogin = document.getElementById("successLogin");
+
+const isValidEmail = (email) => {
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  return emailRegex.test(email);
+};
+
+const isValidPassword = (password) => {
+  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
+  return passwordRegex.test(password);
+};
+
+const isValidName = (userName) => {
+  const usernameRegex = /^[a-zA-Z0-9]+$/;
+  return usernameRegex.test(userName);
+};
+
+const displayError = (errorContainer, errorMessage) => {
+  errorContainer.style.display = "block";
+  errorContainer.style.color = "red";
+  errorContainer.textContent = errorMessage;
+};
+
+const displaySuccess = (successMessage) => {
+  successContainer.style.display = "block";
+  successContainer.style.color = "green";
+  successContainer.textContent = successMessage;
+};
+
+const checkLoggedIn = () => {
+  let isLoggedIn = JSON.parse(localStorage.getItem("isLoggedIn"));
+
+  if (isLoggedIn == true) {
+    let loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+    console.log(loggedInUser);
+    btnOpen.innerHTML = `<span>Welcome ${loggedInUser.username} 🎉</span>
+                  <a style="text-decoration: none; color:red;" onclick="signOut()" href="#">Sign Out</a>`;
+  }
+};
+checkLoggedIn();
+
+const signOut = () => {
+  localStorage.setItem("loggedInUser", JSON.stringify(""));
+  localStorage.setItem("isLoggedIn", JSON.stringify(false));
+  location.reload();
+};
+
+loginForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  //const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+  const username = document.getElementById("user").value;
+
+  let users = [];
+  users = JSON.parse(localStorage.getItem("users"));
+  console.log(typeof users);
+
+  // const user = users.find(
+  //   (user) => user.username === username && user.password === password
+  // );
+  let user = null;
+  for (let i = 0; i < users.length; i++) {
+    if (users[i].username === username && users[i].password === password) {
+      user = users[i];
+      break;
+    }
+  }
+
+  if (user) {
+    localStorage.setItem("loggedInUser", JSON.stringify(user));
+    localStorage.setItem("isLoggedIn", JSON.stringify(true));
+    checkLoggedIn();
+  } else {
+    errorContainer.textContent = "Invaild name or password";
+    return;
+  }
+
+  // If all validations pass, submit the form
+  loginForm.submit();
+  closeModal();
+});
+
+const regEmail = document.getElementById("email1");
+const regPassword = document.getElementById("password1");
+const regUserName = document.getElementById("name1");
+
+const validateEmail = () => {
+  const errDiv = document.querySelector(".error-email");
+
+  if (regEmail.value === "") {
+    displayError(errDiv, "Email field is required!");
+    return;
+  }
+
+  if (!isValidEmail(regEmail.value)) {
+    displayError(errDiv, "Invalid email address!");
+    return;
+  } else {
+    errDiv.textContent = "";
+    return true;
+  }
+};
+
+const validatePassword = () => {
+  const errDiv = document.querySelector(".error-password");
+
+  if (regPassword.value === "") {
+    displayError(errDiv, "Password field is required!");
+    return;
+  }
+
+  if (!isValidPassword(regPassword.value)) {
+    displayError(errDiv, "Invalid password!");
+    return;
+  } else {
+    errDiv.textContent = "";
+    return true;
+  }
+};
+
+const validateName = () => {
+  const errDiv = document.querySelector(".error-name");
+  if (regUserName.value === "") {
+    displayError(errDiv, "Name field is required!");
+    return;
+  }
+
+  if (!isValidName(regUserName.value)) {
+    displayError(errDiv, "Invalid name!");
+    return;
+  } else {
+    errDiv.textContent = "";
+    return true;
+  }
+};
+
+regEmail.addEventListener("input", validateEmail);
+regPassword.addEventListener("input", validatePassword);
+regUserName.addEventListener("input", validateName);
+
+registrationForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  if (validatePassword() && validateName()) {
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+    // const isUserName = users.some((user) => user.userName === regUserName);
+    let isUserName = false;
+    for (let i = 0; i < users.length; i++) {
+      if (users[i].username === regUserName.value) {
+        isUserName = true;
+        break;
+      }
+    }
+    if (isUserName) {
+      errorContainer.textContent = "Username already logged in";
+      return;
+    } else {
+      const newUser = {
+        username: regUserName.value,
+        password: regPassword.value,
+      };
+      users.push(newUser);
+      localStorage.setItem("users", JSON.stringify(users));
+    }
+
+    displaySuccess("Form submitted successfully!");
+    registrationForm.submit();
+    setTimeout(closeModal, 4000);
+  }
+});
+
+// localStorage.clear();
+
+btnRegisterModal.addEventListener("click", () => {
+  modal.classList.add("active");
+});
+
+btnLoginModal.addEventListener("click", () => {
+  modal.classList.remove("active");
+});
+
+const openModal = () => {
+  modal.classList.add("active-btn");
+  overlay.classList.remove("hidden");
+};
+
+const closeModal = () => {
+  modal.classList.remove("active-btn");
+  overlay.classList.add("hidden");
+};
+
+btnOpen.addEventListener("click", openModal);
+
+btnClose.addEventListener("click", closeModal);
+
+overlay.addEventListener("click", closeModal);
+
+// ----------- Slider -------------
+
+const imgNoon = document.querySelector(".img-noon");
 const slider = document.querySelector(".slider");
 const slides = document.querySelectorAll(".slide");
 const btnLeft = document.querySelector(".btn-left");
 const btnRight = document.querySelector(".btn-right");
 const dashs = document.querySelector(".dashs");
+
+imgNoon.insertAdjacentHTML(
+  "beforeend",
+  '<img src="images/8.png" alt="img-noon" width="100%">'
+);
 
 let curSlide = 0;
 const maxSlide = slides.length; //Number of Nodelist
@@ -54,11 +273,18 @@ const prevSlide = () => {
   activeDash(curSlide);
 };
 
-setInterval(nextSlide, 3000);
+const mySildeShow = setInterval(nextSlide, 3000);
 
 //Event handler
-btnRight.addEventListener("click", nextSlide);
-btnLeft.addEventListener("click", prevSlide);
+btnRight.addEventListener("click", () => {
+  clearInterval(mySildeShow);
+  nextSlide();
+});
+btnLeft.addEventListener("click", () => {
+  clearInterval(mySildeShow);
+  prevSlide();
+});
+
 dashs.addEventListener("click", (e) => {
   if (e.target.classList.contains("dashs-dash")) {
     // console.log('dash')
@@ -68,25 +294,20 @@ dashs.addEventListener("click", (e) => {
   }
 });
 
+// GEt Data
+const getData = (params) =>
+  fetch(`https://dummyjson.com/${params}`).then((res) => res.json());
+
 // Function to Get Data From API and Append It to Main
-
-const loadData = (param) => {
-  // load Categories Menue
-
-  // Main Content Div
+const loadData = async (param) => {
   const mainContentDiv = document.querySelector("#mainContent");
   mainContentDiv.innerHTML = "";
 
-  //Get Data From API
-  fetch(`https://dummyjson.com/${param}`)
-    .then((res) => res.json())
-    .then((json) => {
-      let res = json.products;
-      console.log(res);
-      //Loop Over Data And MAke A Card For Each Product
-      res.map((el) => {
-        // console.log(el);
-        mainContentDiv.innerHTML += `
+  let res = await getData(param);
+  console.log(res.products);
+
+  res.products.map((el) => {
+    mainContentDiv.innerHTML += `
         <div class="card border-0 shadow mb-5" style="width: 18rem">
         <img
         loading="lazy"
@@ -110,7 +331,7 @@ const loadData = (param) => {
         </p>
         <div class=" fw-bold  m-3">${el.price} $</div>
         <div class="d-flex justify-content-between mt-auto">
-        <button href=""  class="btn btn-warning"  >
+        <button href="" class="btn btn-warning"  >
         Add To Cart
         </button>
         <span class=" bg-success link-light p-2 rounded">
@@ -121,37 +342,74 @@ const loadData = (param) => {
         </div>
         </div>
         `;
-      });
-    });
+  });
 };
 
 // Get All Categories
-const getCategories = () => {
+const getCategories = async () => {
   const categoriesContainer = document.querySelector(".categories");
   categoriesContainer.innerHTML = `
-        <li class="nav-item btn btn-warning m-1 rounded">
-         <a class="nav-link 
-          text-dark" href="#"
-          onclick="loadData('products?limit=0')"
-          >
-          ALL CATOGARIES &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-         </a>
+        <li class="nav-item">
+          <a class="nav-link active" href="#category"onclick="loadData('products?limit=0')">
+           ALL CATOGARIES &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+          </a>
         </li>`;
 
-  fetch("https://dummyjson.com/products/categories")
-    .then((res) => res.json())
-    .then((json) =>
-      json.map(
-        (cat) =>
-          (categoriesContainer.innerHTML += ` 
-            <li class="nav-item btn btn-warning m-1 rounded" >
-              <a class="nav-link text-dark" href="#" 
-              onclick="loadData('products/category/${cat}')">
-              ${cat}
+  const res = await getData("products/categories");
+
+  res.map(
+    (cat) =>
+      (categoriesContainer.innerHTML += ` 
+            <li class="nav-item" >
+              <a class="nav-link " href="#categories"
+                onclick="loadData('products/category/${cat}');changeActive()">
+                ${cat.toUpperCase()}
               </a>
            </li>`)
-      )
-    );
+  );
+};
+/*
+onclick=" changeActive()"
+*/
+const changeActive = function () {
+  console.log("im working");
+  const paginationLinks = document.querySelectorAll(".nav-tabs .nav-link");
+  paginationLinks.forEach(function (link) {
+    link.addEventListener("click", function (event) {
+      event.preventDefault();
+      console.log("im working");
+      paginationLinks.forEach(function (link) {
+        link.classList.remove("active");
+      });
+
+      this.classList.add("active");
+    });
+  });
+};
+
+//Search
+const searchProducts = async () => {
+  const searchValue = document.querySelector(".inpt-search").value;
+  const dropDown = document.querySelector(".dropdown-content");
+
+  if (searchValue == "") {
+    dropDown.innerHTML = "";
+    dropDown.classList.remove("show");
+    return;
+  }
+  dropDown.innerHTML = "";
+  const res = await getData(`products/search?q=${searchValue}`);
+  console.log(res);
+  res.products.length > 0
+    ? dropDown.classList.add("show")
+    : dropDown.classList.remove("show");
+  res.products.map((product, i) => {
+    if (i >= 10) return;
+    let newOption = document.createElement("a");
+    newOption.textContent = product.title;
+    newOption.href = "#";
+    dropDown.appendChild(newOption);
+  });
 };
 
 // To Get The Id Of a Product When Click On it And open Single Product Page
@@ -164,3 +422,7 @@ const openSingleProductPage = (id) => {
 // Fire The Function When Load
 loadData("products?limit=0");
 getCategories();
+
+document
+  .querySelector(".inpt-search")
+  .addEventListener("input", searchProducts);
