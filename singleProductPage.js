@@ -70,7 +70,7 @@ const loadSingleProductData = async () => {
               <img src="images/707dcf7e-9467-4bd9-8cfe-8d5ade48c8bd.png"width="100%">
               <p><b> Quantity</b></p>
               <input type="number" name="number" value="1" style="height: 40px; width: 4em;">
-              <button onclick="cart(${product.id},${
+              <button onclick="addToCart(${product.id},${
       document.getElementsByName("input").value
     } )" style="height: 40px; width: 85%; border: 0; background-color: rgb(44, 44, 249); color: #ffff; ">Add To Cart</button>
           </form>

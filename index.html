@@ -71,7 +71,7 @@
     <header>
       <nav id="myNav" class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#"
+          <a class="navbar-brand" href="./index.html"
             ><svg
               id="logoNoon"
               width="173"
@@ -118,36 +118,33 @@
                   Deliver to
                   <b>Cairo</b>
                 </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item" href="#">Action</a></li>
-                  <li><a class="dropdown-item" href="#">Another action</a></li>
-                  <li><hr class="dropdown-divider" /></li>
-                  <li>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                  </li>
-                </ul>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown"></ul>
               </li>
-              <form class="inpt-form">
-                <input
-                  class="inpt-search"
-                  class="form-control me-2"
-                  type="search"
-                  placeholder="What are you looking for?"
-                  aria-label="Search"
-                />
-                <div id="dropdown" class="dropdown-content"></div>
-              </form>
-
+            </ul>
+          </div>
+          <form class="d-flex" style="width: 65%">
+            <input
+              class="form-control me-2"
+              type="search"
+              placeholder="What are you looking for?"
+              aria-label="Search"
+            />
+            <div id="dropdown" class="dropdown-content"></div>
+          </form>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item myItems">
                 <a class="nav-link fw-bold open" aria-current="page" href="#"
-                  >Sign In <img class="iconImg" src="./user (1).png" alt="user"
-                /></a>
+                  >Sign In <i class="fa-solid fa-user"></i
+                ></a>
               </li>
               <li class="nav-item myItems">
-                <a class="nav-link fw-bold" href="#"
+                <a class="nav-link fw-bold" href="cart.html"
                   >Cart
-                  <img class="iconImg" src="./shopping-cart.png" alt="cart"
-                /></a>
+
+                  <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                  <i class="badge badge-success" id="cartIcon"></i>
+                </a>
               </li>
             </ul>
           </div>

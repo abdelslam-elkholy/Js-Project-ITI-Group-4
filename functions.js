@@ -35,3 +35,32 @@ const openSingleProductPage = (id) => {
   document.cookie = `productId = ${id} ; expires = ${date}`;
   location.href = "./singleProductPage.html";
 };
+
+///save to local storage
+const addToCart = (id, quan) => {
+  const products = JSON.parse(localStorage.getItem("products")) || [];
+
+  const existingProductIndex = products.findIndex(
+    (product) => product.id === id
+  );
+
+  if (existingProductIndex !== -1) {
+    products[existingProductIndex].quantity += quan ? quan : 1;
+  } else {
+    const newProduct = { id, quantity: quan ? quan : 1 };
+    products.push(newProduct);
+  }
+
+  localStorage.setItem("products", JSON.stringify(products));
+  updateCartNum();
+};
+
+const updateCartNum = () => {
+  let cartItems = JSON.parse(localStorage.getItem("products"));
+  let cartItemsNum = 0;
+  if (cartItems) {
+    cartItems.map((item) => (cartItemsNum += Number(item.quantity)));
+  }
+
+  document.getElementById("cartIcon").innerHTML = cartItemsNum;
+};

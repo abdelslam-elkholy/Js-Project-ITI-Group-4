@@ -327,7 +327,7 @@ const loadData = async (param) => {
         </p>
         <div class=" fw-bold  m-3">${el.price} $</div>
         <div class="d-flex justify-content-between mt-auto">
-        <button href="" class="btn btn-warning"  >
+        <button href="" class="btn btn-warning" onclick="addToCart(${el.id})"  >
         Add To Cart
         </button>
         <span class=" bg-success link-light p-2 rounded">
@@ -386,6 +386,6 @@ const changeActive = function () {
 loadData("products?limit=0");
 getCategories();
 
-document
-  .querySelector(".inpt-search")
-  .addEventListener("input", searchProducts);
+// document
+//   .querySelector(".inpt-search")
+//   .addEventListener("input", searchProducts);
