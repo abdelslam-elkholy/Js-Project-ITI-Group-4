@@ -38,9 +38,6 @@
     ></script>
 
     <style>
-      .div1 {
-        display: flex;
-      }
       #myNav {
         background-color: #feee00 !important;
       }
@@ -49,22 +46,14 @@
         width: 100px;
       }
       .form-control {
-        /* width: 100%; */
-        width: 1050px;
         height: 36px;
-      }
-      .iconImg {
-        width: 17px;
-        height: 17px;
       }
       .flag {
         width: 29px;
         height: 29px;
       }
       .myItems:not(.dropdown-menu):hover {
-        /* background-color: #878787; */
         opacity: 0.4;
-        /* color: red !important; */
       }
     </style>
   </head>
@@ -72,7 +61,7 @@
     <header>
       <nav id="myNav" class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#"
+          <a class="navbar-brand" href="./index.html"
             ><svg
               id="logoNoon"
               width="173"
@@ -119,40 +108,37 @@
                   Deliver to
                   <b>Cairo</b>
                 </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item" href="#">Action</a></li>
-                  <li><a class="dropdown-item" href="#">Another action</a></li>
-                  <li><hr class="dropdown-divider" /></li>
-                  <li>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                  </li>
-                </ul>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown"></ul>
               </li>
-              <form class="d-flex">
-                <input
-                  class="form-control me-2"
-                  type="search"
-                  placeholder="What are you looking for?"
-                  aria-label="Search"
-                />
-              </form>
-              <ul class="nav justify-content-end"></ul>
+            </ul>
+          </div>
+          <form class="d-flex" style="width: 65%">
+            <input
+              class="form-control me-2"
+              type="search"
+              placeholder="What are you looking for?"
+              aria-label="Search"
+            />
+            <div id="dropdown" class="dropdown-content"></div>
+          </form>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item myItems">
-                <a class="nav-link fw-bold" aria-current="page" href="#"
-                  >Sign In <img class="iconImg" src="./user (1).png" alt="user"
-                /></a>
+                <a class="nav-link fw-bold open" aria-current="page" href="#"
+                  >Sign In <i class="fa-solid fa-user"></i
+                ></a>
               </li>
               <li class="nav-item myItems">
                 <a class="nav-link fw-bold" href="#"
-                  >Cart
-                  <img class="iconImg" src="./shopping-cart.png" alt="cart"
-                /></a>
+                  >Cart <i class="fa-solid fa-cart-shopping"></i
+                ></a>
               </li>
             </ul>
           </div>
         </div>
       </nav>
     </header>
+
     <div class="div1" id="singleProductPage"></div>
 
     <footer class="text-start">
