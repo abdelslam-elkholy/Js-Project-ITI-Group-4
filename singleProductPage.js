@@ -12,9 +12,8 @@ const loadSingleProductData = async () => {
   console.log(product);
 
   const body = document.querySelector("#singleProductPage");
-  body.innerHTML = `
-  
-      <div class="container-fluid mt-3 " style=" width: 33%; background-color:white;">
+  body.innerHTML =
+    `   <div class="container-fluid mt-3 " style=" width: 33%; background-color:white;">
       <div class="ecommerce-gallery" data-mdb-zoom-effect="true" data-mdb-auto-height="true">
           <div class="row py-3 shadow-5">
             <div class="col-12 mb-1">
@@ -25,39 +24,24 @@ const loadSingleProductData = async () => {
                   class="ecommerce-gallery-main-img active w-100"
                 />
               </div>
-            </div>
-            <div class="col-3 mt-1">
-              <img
-                src="${product.images[1]}"
-                data-mdb-img="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Vertical/14a.webp"
-                alt="Gallery image 1"
-                class="active w-100"
-              />
-            </div>
-            <div class="col-3 mt-1">
-              <img
-                src="${product.images[2]}"
-                data-mdb-img="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Vertical/12a.webp"
-                alt="Gallery image 2"
-                class="w-100"
-              />
-            </div>
-            <div class="col-3 mt-1">
-              <img
-                src="${product.images[3]}"
-                data-mdb-img="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Vertical/13a.webp"
-                alt="Gallery image 3"
-                class="w-100"
-              />
-            </div>
-            <div class="col-3 mt-1">
-              <img
-                src="${product.images[4]}"
-                data-mdb-img="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Vertical/15a.webp"
-                alt="Gallery image 4"
-                class="w-100"
-              />
-            </div>
+            </div>` +
+    product.images.map((img, i) => {
+      console.log(img);
+      if (i != 0) {
+        let image = `<div class="col-3 mt-1">
+        <img
+          src="${img}"
+          data-mdb-img="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Vertical/14a.webp"
+          alt="Gallery image 1"
+          class="active w-100"
+        />
+      </div>`;
+        console.log(image);
+        return image;
+      }
+    }) +
+    `
+    
           </div>
         </div>
         </div>
@@ -81,8 +65,8 @@ const loadSingleProductData = async () => {
               <p><b> Quantity</b></p>
               <input type="number" name="number" value="1" style="height: 40px; width: 4em;">
               <button onclick="cart(${product.id},${
-    document.getElementsByName("input").value
-  } )" style="height: 40px; width: 85%; border: 0; background-color: rgb(44, 44, 249); color: #ffff; ">Add To Cart</button>
+      document.getElementsByName("input").value
+    } )" style="height: 40px; width: 85%; border: 0; background-color: rgb(44, 44, 249); color: #ffff; ">Add To Cart</button>
           </form>
             </div>
       <div class="container-fluid mt-3 " style=" width: 30%; background-color:white;">
