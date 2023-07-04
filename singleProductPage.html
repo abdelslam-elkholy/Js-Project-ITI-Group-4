@@ -63,6 +63,7 @@
       }
     </style>
   </style>
+  <script src="./functions.js"></script>
   </head>
   <body >
     <header>
@@ -124,14 +125,17 @@
                   </li>
                 </ul>
               </li>
-              <form class="d-flex">
+              <form class="inpt-form">
                 <input
+                  class="inpt-search"
                   class="form-control me-2"
                   type="search"
                   placeholder="What are you looking for?"
                   aria-label="Search"
                 />
+                <div id="dropdown" class="dropdown-content"></div>
               </form>
+
               <ul class="nav justify-content-end"></ul>
               <li class="nav-item myItems">
                 <a class="nav-link fw-bold" aria-current="page" href="#"
