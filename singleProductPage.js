@@ -11,9 +11,11 @@ const loadSingleProductData = async () => {
   );
   console.log(product);
 
-  const body = document.querySelector("#singleProductPage");
-  body.innerHTML =
-    `   <div class="container-fluid mt-3 " style=" width: 33%; background-color:white;">
+  const bod = document.querySelector("#singleProductPage");
+  bod.innerHTML =
+    `
+  
+      <div class="container-fluid mt-3 " style=" width: 33%; background-color:white;">
       <div class="ecommerce-gallery" data-mdb-zoom-effect="true" data-mdb-auto-height="true">
           <div class="row py-3 shadow-5">
             <div class="col-12 mb-1">
@@ -25,23 +27,26 @@ const loadSingleProductData = async () => {
                 />
               </div>
             </div>` +
-    product.images.map((img, i) => {
-      console.log(img);
-      if (i != 0) {
-        let image = `<div class="col-3 mt-1">
-        <img
-          src="${img}"
-          data-mdb-img="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Vertical/14a.webp"
-          alt="Gallery image 1"
-          class="active w-100"
-        />
-      </div>`;
-        console.log(image);
-        return image;
-      }
-    }) +
+    product.images
+      .map((img, i) => {
+        console.log(img);
+        if (i != 0) {
+          let image = `<div class="col-3 mt-1">
+      <img
+        src="${img}"
+        data-mdb-img="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Vertical/14a.webp"
+        alt="Gallery image 1"
+        class="active w-100"
+      />
+    </div>`;
+          console.log(image);
+          return image;
+        }
+      })
+      .join("") +
     `
-    
+            
+            
           </div>
         </div>
         </div>
@@ -50,15 +55,16 @@ const loadSingleProductData = async () => {
           <h4 class="nameproduct">${product.title}
           </h4>
           <h3>${product.description} </h3>
-          <p>Model Number :${product.brand}</p>
-          <p>rating:<span class=" bg-success link-light p-2 rounded">
-          <i class="fa-solid fa-star"></i>
+          <p>Model Number :&nbsp;&nbsp;${product.brand}</p>
+          <p>rating:&nbsp;&nbsp;<span class=" bg-success link-light p-1 rounded">
+          <i class="fa-solid fa-star" style="font-size:10px;"></i>
           ${product.rating.toFixed(1)}</span></p>
-          <p class="price">Was:${product.price}</p>
-          <p class="lastprice">Now:${
-            product.price - product.price * (product.discountPercentage / 100)
-          }</p>
-          <p>Saving:<strong
+          <p class="price">Was:&nbsp;&nbsp;&nbsp;${product.price}</p>
+          <p class="lastprice ">Now: &nbsp;&nbsp;<b style="color:red;"class="font-weight-bold">${(
+            product.price -
+            product.price * (product.discountPercentage / 100)
+          ).toFixed(1)} &nbsp;(EGP)</b></p>
+          <p>Saving:&nbsp;&nbsp;<strong
               class="align-self-center text-lowercase badge  text-wrap fw-bolder fst-italic "
               style="border-radius: 50px 20px; background-color: rgb(241, 241, 4);color: black;">express</strong></p>
               <img src="images/707dcf7e-9467-4bd9-8cfe-8d5ade48c8bd.png"width="100%">
@@ -104,6 +110,3 @@ const loadSingleProductData = async () => {
 };
 
 loadSingleProductData();
-document
-  .querySelector(".inpt-search")
-  .addEventListener("input", searchProducts);
