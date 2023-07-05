@@ -80,8 +80,8 @@ const getProducts = async () => {
                 </div>
              </div>`;
       total += Number(element.price * product.quantity);
-      // const numItems = document.querySelector(`#numItems${element.id}`);
-      // numItems.selectedIndex = product.quantity;
+      const numItems = document.querySelector(`#numItems${element.id}`);
+      numItems.value = product.quantity.toString();
     }
 
     const divOrderSummary = document.querySelector("#divOrderSummary");
