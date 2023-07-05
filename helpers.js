@@ -63,7 +63,9 @@ const updateCartNum = () => {
   }
   localStorage.setItem("cartItemsNum", JSON.stringify(cartItemsNum));
 
-  const cart = document.getElementById("cartIcon");
-  cart.innerHTML = cartItemsNum;
-  cart.style.backgroundColor = "red";
+  if (cartItemsNum > 0) {
+    const cart = document.getElementById("cartIcon");
+    cart.innerHTML = cartItemsNum;
+    cart.style.backgroundColor = "red";
+  }
 };
