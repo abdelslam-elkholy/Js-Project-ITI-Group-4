@@ -110,3 +110,7 @@ const loadSingleProductData = async () => {
 };
 
 loadSingleProductData();
+
+document
+  .querySelector(".inpt-search")
+  .addEventListener("input", searchProducts);

@@ -176,3 +176,7 @@ const updateQuantity = (id, quantity) => {
   itemsDiv.innerHTML = "";
   getProducts();
 };
+
+document
+  .querySelector(".inpt-search")
+  .addEventListener("input", searchProducts);
