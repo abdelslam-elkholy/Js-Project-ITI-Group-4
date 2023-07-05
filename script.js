@@ -181,7 +181,7 @@ registrationForm.addEventListener("submit", (e) => {
 
     displaySuccess("Form submitted successfully!");
     registrationForm.submit();
-    setTimeout(closeModal, 4000);
+    setTimeout(closeModal, 5000);
   }
 });
 
