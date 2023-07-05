@@ -387,6 +387,6 @@ loadData("products?limit=0");
 getCategories();
 
 updateCartNum();
-// document
-//   .querySelector(".inpt-search")
-//   .addEventListener("input", searchProducts);
+document
+  .querySelector(".inpt-search")
+  .addEventListener("input", searchProducts);
