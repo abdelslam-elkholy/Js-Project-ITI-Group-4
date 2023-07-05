@@ -1,8 +1,9 @@
 "use strict";
 
 // Get Products From LOcla Storage
-let getProducts = () => {
+const getProducts = async () => {
   updateCartNum();
+
   let CartItems = JSON.parse(localStorage.getItem("cartItemsNum"));
   let products = JSON.parse(localStorage.getItem("products"));
 
@@ -10,20 +11,14 @@ let getProducts = () => {
   let total = 0;
 
   if (products) {
-    console.log(products);
-    products.map((product) => {
-      fetch(`https://dummyjson.com/products/${product.id}`)
-        .then((res) => res.json())
-        .then((element) => {
-          const numOfItems = document.querySelector("#numOfItems");
-          numOfItems.innerHTML = `<span style="font-size: 25px">
-             Cart
-             <span style="color: gray; font-size: 18px">
-                 (${CartItems} item)
-             </span>
-            </span>`;
-          const itemsDiv = document.querySelector("#itemsDiv");
-          itemsDiv.innerHTML += `<div id="myItems" class="items">
+    const itemsDiv = document.querySelector("#itemsDiv");
+    itemsDiv.innerHTML = "";
+    for (const product of products) {
+      const response = await fetch(
+        `https://dummyjson.com/products/${product.id}`
+      );
+      const element = await response.json();
+      itemsDiv.innerHTML += `<div id="myItems" class="items">
               <img class="itemImg"
                 src="${element.thumbnail}"/>
              <div class="details">
@@ -61,7 +56,7 @@ let getProducts = () => {
                         name="num${element.id}"
                         id="numItems${element.id}"
                         style="width: fit-content; height: fit-content"
-                        value=${product.quantity.toString()}
+                        value=${product.quantity}
                         onchange="updateQuantity(${element.id}, this.value)"
                     >
                         <option value="1">1</option>
@@ -84,11 +79,13 @@ let getProducts = () => {
                 </div>
                 </div>
              </div>`;
-          const divOrderSummary = document.querySelector("#divOrderSummary");
-          total += Number(element.price * product.quantity);
-          // const numItems = document.querySelector(`#numItems_${element.id}`);
-          // numItems.value = product.quantity.toString();
-          divOrderSummary.innerHTML = `<div class="orderSummary p-4 rounded-bottom">
+      total += Number(element.price * product.quantity);
+      // const numItems = document.querySelector(`#numItems${element.id}`);
+      // numItems.selectedIndex = product.quantity;
+    }
+
+    const divOrderSummary = document.querySelector("#divOrderSummary");
+    divOrderSummary.innerHTML = `<div class="orderSummary p-4 rounded-bottom">
           <h3>Order Summary</h3>
           <div class="input-group mb-3">
             <input
@@ -146,8 +143,6 @@ let getProducts = () => {
               CHECKOUT
             </button>
           </div>`;
-        });
-    });
   }
 };
 
