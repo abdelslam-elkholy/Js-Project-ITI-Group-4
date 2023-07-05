@@ -2,7 +2,13 @@
 
 // Get Products From LOcla Storage
 let getProducts = () => {
+  updateCartNum();
+  let CartItems = JSON.parse(localStorage.getItem("cartItemsNum"));
   let products = JSON.parse(localStorage.getItem("products"));
+
+  let shipping = 65;
+  let total = 0;
+
   if (products) {
     console.log(products);
     products.map((product) => {
@@ -13,7 +19,7 @@ let getProducts = () => {
           numOfItems.innerHTML = `<span style="font-size: 25px">
              Cart
              <span style="color: gray; font-size: 18px">
-                 (${products.length} item)
+                 (${CartItems} item)
              </span>
             </span>`;
           const itemsDiv = document.querySelector("#itemsDiv");
@@ -38,19 +44,25 @@ let getProducts = () => {
                     />
                     item cannot be exchanged or returned.
                     </span >
-                    <h6 onclick="deleteItem(${element.id})" style="cursor: pointer">
+                    <h6 onclick="deleteItem(${
+                      element.id
+                    })" style="cursor: pointer">
                         <i class="fa-solid fa-trash"></i> Remove
                     </h6>
               </div>
                 <div class="rightSide">
                     <div class="row">
-                    <p style="color: gray">EGP<b style="color: black">${element.price}</b></p>
+                    <p style="color: gray">EGP<b style="color: black">${
+                      element.price * product.quantity
+                    }</b></p>
                     </div>
                     <div class="row d-flex justify-content-center">
                     <select
-                        name="num"
-                        id="numItems"
+                        name="num${element.id}"
+                        id="numItems${element.id}"
                         style="width: fit-content; height: fit-content"
+                        value=${product.quantity.toString()}
+                        onchange="updateQuantity(${element.id}, this.value)"
                     >
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -63,6 +75,7 @@ let getProducts = () => {
                         <option value="9">9</option>
                         <option value="10">10</option>
                     </select>
+                    
                     <img
                         src="https://f.nooncdn.com/s/app/com/noon/images/fulfilment_express_v2-en.svg"
                         width="80px"
@@ -72,11 +85,9 @@ let getProducts = () => {
                 </div>
              </div>`;
           const divOrderSummary = document.querySelector("#divOrderSummary");
-          var shipping = 65;
-          var total = parseInt(element.price + shipping);
-          console.log(element.price);
-          console.log(shipping);
-          console.log(total);
+          total += Number(element.price * product.quantity);
+          // const numItems = document.querySelector(`#numItems_${element.id}`);
+          // numItems.value = product.quantity.toString();
           divOrderSummary.innerHTML = `<div class="orderSummary p-4 rounded-bottom">
           <h3>Order Summary</h3>
           <div class="input-group mb-3">
@@ -92,8 +103,8 @@ let getProducts = () => {
             >
           </div>
           <div class="d-flex justify-content-between">
-            <span style="color: gray">Subtotal (${products.length} item)</span
-            ><span style="color: gray">EGP ${element.price}</span>
+            <span style="color: gray">Subtotal (${CartItems} item)</span
+            ><span style="color: gray">EGP ${total}</span>
           </div>
           <div class="d-flex justify-content-between">
             <span style="color: gray"
@@ -110,7 +121,7 @@ let getProducts = () => {
               >
             </span>
             <span style="color: gray; font-size: 20px; font-weight: 400"
-              >EGP ${total}</span
+              >EGP ${total + shipping}</span
             >
           </div>
 
@@ -157,12 +168,16 @@ function checkout() {
   localStorage.setItem("products", JSON.stringify(products));
   const itemsDiv = document.querySelector("#itemsDiv");
   itemsDiv.innerHTML = ``;
-  getProducts();
-  setTimeout(() => {
-    location.href = "thankYou.html";
-  }, 600);
-  // setTimeout(() => {
-  //   location.href = "./index.html";
-  //   console.log("settime");
-  // }, 2000);
+
+  location.href = "thankYou.html";
 }
+
+const updateQuantity = (id, quantity) => {
+  const products = JSON.parse(localStorage.getItem("products"));
+  const productIndex = products.findIndex((product) => product.id === id);
+  products[productIndex].quantity = parseInt(quantity);
+  localStorage.setItem("products", JSON.stringify(products));
+  const itemsDiv = document.querySelector("#itemsDiv");
+  itemsDiv.innerHTML = "";
+  getProducts();
+};
