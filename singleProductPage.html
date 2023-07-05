@@ -3,8 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-
+    <title>Cart</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -12,7 +11,6 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css"
@@ -20,24 +18,99 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.js"
+      integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+      crossorigin="anonymous"
+    ></script>
 
     <link rel="stylesheet" href="style.css" />
-
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"
-      integrity="sha512-fD9DI5bZwQxOi7MhYWnnNPlvXdp/2Pj3XSTRrFs5FQa4mizyGLnJcN6tuvUS6LbmgN1ut+XGSABKvjN0H6Aoow=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    ></script>
-
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.min.js"
-      integrity="sha512-3dZ9wIrMMij8rOH7X3kLfXAzwtcHpuYpEgQg1OA4QAob1e81H8ntUQmQm3pBudqIoySO5j0tHN4ENzA6+n2r4w=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    ></script>
-
+    <!-- <script>
+      $(function () {
+        $("#header").load("header.html");
+      });
+    </script> -->
     <style>
+      body {
+        background-color: rgb(238, 242, 245);
+      }
+      #main {
+        display: flex;
+        flex-direction: row;
+      }
+      .left {
+        width: 60%;
+      }
+      .left *:not(img):not(i) {
+        margin: 15px;
+      }
+      .left * {
+        border-radius: 5px;
+      }
+      .right {
+        width: 35%;
+      }
+      .right * {
+        padding: 5px;
+      }
+      .img1 {
+        display: block;
+        width: 100%;
+      }
+      .note {
+        border: 1px solid rgb(222, 222, 222);
+        background-color: rgb(247, 245, 243);
+        display: flex;
+        justify-content: space-between;
+        justify-items: center;
+      }
+      .note p {
+        width: 70%;
+        text-align: left;
+      }
+      .note .p2 {
+        width: fit-content;
+        height: fit-content;
+        color: rgb(231, 178, 21);
+        font-weight: 700;
+        cursor: pointer;
+      }
+      .items {
+        display: flex;
+        background-color: rgb(255, 255, 255);
+      }
+      .items .itemImg {
+        width: 15%;
+        height: 100%;
+        cursor: pointer;
+      }
+      .items .details .brand {
+        color: gray;
+      }
+      .cannot {
+        width: fit-content;
+        float: left;
+        margin-left: 15px;
+      }
+      .shopping {
+        color: blue;
+        border: 1px solid blue;
+        border-radius: 5px;
+        cursor: pointer;
+        margin: 15px;
+        background-color: white;
+      }
+      .numItems {
+        padding: 51px;
+      }
+      .rightSide {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      .orderSummary {
+        border: 1px solid lightgray;
+      }
       #myNav {
         background-color: #feee00 !important;
       }
@@ -56,9 +129,10 @@
         opacity: 0.4;
       }
     </style>
+
     <script src="./helpers.js"></script>
-    <link rel="stylesheet" href="style.css" />
   </head>
+
   <body>
     <header>
       <nav id="myNav" class="navbar navbar-expand-lg navbar-light bg-light">
@@ -131,9 +205,12 @@
                 ></a>
               </li>
               <li class="nav-item myItems">
-                <a class="nav-link fw-bold" href="#"
-                  >Cart <i class="fa-solid fa-cart-shopping"></i
-                ></a>
+                <a class="nav-link fw-bold" href="cart.html"
+                  >Cart
+
+                  <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                  <i class="badge badge-success" id="cartIcon"></i>
+                </a>
               </li>
             </ul>
           </div>
