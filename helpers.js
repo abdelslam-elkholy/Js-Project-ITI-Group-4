@@ -62,5 +62,8 @@ const updateCartNum = () => {
     cartItems.map((item) => (cartItemsNum += Number(item.quantity)));
   }
   localStorage.setItem("cartItemsNum", JSON.stringify(cartItemsNum));
-  document.getElementById("cartIcon").innerHTML = cartItemsNum;
+
+  const cart = document.getElementById("cartIcon");
+  cart.innerHTML = cartItemsNum;
+  cart.style.backgroundColor = "red";
 };
