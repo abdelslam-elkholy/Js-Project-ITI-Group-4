@@ -69,7 +69,6 @@ const getProducts = async () => {
     });
 
     await Promise.all(fetchPromises);
-
     const divOrderSummary = document.querySelector("#divOrderSummary");
     divOrderSummary.innerHTML = `<div class="orderSummary p-4 rounded-bottom">
           <h3>Order Summary</h3>
