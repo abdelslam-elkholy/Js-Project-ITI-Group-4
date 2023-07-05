@@ -58,6 +58,7 @@ const getProducts = async () => {
                      onchange="updateQuantity(${element.id}, this.value)"
                      style="width: fit-content; height: fit-content"
                      value =${product.quantity}
+                     min=1
                      >
                     <img
                         src="https://f.nooncdn.com/s/app/com/noon/images/fulfilment_express_v2-en.svg"
@@ -140,16 +141,13 @@ function deleteItem(id) {
   const selectedIndex = products.findIndex((product) => product.id === id);
   products.splice(selectedIndex, 1);
   localStorage.setItem("products", JSON.stringify(products));
-  const itemsDiv = document.querySelector("#itemsDiv");
-  itemsDiv.innerHTML = ``;
+
   getProducts();
 }
 
 function checkout() {
   const products = [];
   localStorage.setItem("products", JSON.stringify(products));
-  const itemsDiv = document.querySelector("#itemsDiv");
-  itemsDiv.innerHTML = ``;
 
   location.href = "thankYou.html";
 }
@@ -160,8 +158,7 @@ const updateQuantity = (id, quantity) => {
 
   products[productIndex].quantity = parseInt(quantity);
   localStorage.setItem("products", JSON.stringify(products));
-  const itemsDiv = document.querySelector("#itemsDiv");
-  itemsDiv.innerHTML = "";
+
   getProducts();
 };
 
