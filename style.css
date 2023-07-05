@@ -59,7 +59,8 @@ body {
   transform: scale(1);
 }
 
-.wrapper .icon-close {
+.wrapper .icon-close,
+.icon-close2 {
   position: absolute;
   top: 0;
   right: 0;
@@ -301,4 +302,8 @@ body {
   border-radius: 100%;
   border: 1px solid rgb(204, 204, 204);
   background: rgb(230, 222, 12);
+}
+
+.div1 {
+  display: flex;
 }

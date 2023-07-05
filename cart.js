@@ -20,7 +20,9 @@ const getProducts = async () => {
       const element = await response.json();
       itemsDiv.innerHTML += `<div id="myItems" class="items">
               <img class="itemImg"
-                src="${element.thumbnail}"/>
+                src="${element.thumbnail}"
+                onclick="openSingleProductPage(${element.id})"
+                />
              <div class="details">
                     <p class="brand">${element.brand}</p>
                     <p>${element.description}</p>
