@@ -13,7 +13,7 @@ const getProducts = async () => {
   if (products) {
     const itemsDiv = document.querySelector("#itemsDiv");
     itemsDiv.innerHTML = "";
-    for (const product of products) {
+    const fetchPromises = products.map(async (product) => {
       const response = await fetch(
         `https://dummyjson.com/products/${product.id}`
       );
@@ -52,25 +52,11 @@ const getProducts = async () => {
                     }</b></p>
                     </div>
                     <div class="row d-flex justify-content-center">
-                    <select
-                        name="num${element.id}"
-                        id="numItems${element.id}"
-                        style="width: fit-content; height: fit-content"
-                        value=${product.quantity}
-                        onchange="updateQuantity(${element.id}, this.value)"
-                    >
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                    </select>
-                    
+                    <input type='number'
+                     onchange="updateQuantity(${element.id}, this.value)"
+                     style="width: fit-content; height: fit-content"
+                     value =${product.quantity}
+                     >
                     <img
                         src="https://f.nooncdn.com/s/app/com/noon/images/fulfilment_express_v2-en.svg"
                         width="80px"
@@ -80,9 +66,9 @@ const getProducts = async () => {
                 </div>
              </div>`;
       total += Number(element.price * product.quantity);
-      const numItems = document.querySelector(`#numItems${element.id}`);
-      numItems.value = product.quantity.toString();
-    }
+    });
+
+    await Promise.all(fetchPromises);
 
     const divOrderSummary = document.querySelector("#divOrderSummary");
     divOrderSummary.innerHTML = `<div class="orderSummary p-4 rounded-bottom">
@@ -170,6 +156,7 @@ function checkout() {
 const updateQuantity = (id, quantity) => {
   const products = JSON.parse(localStorage.getItem("products"));
   const productIndex = products.findIndex((product) => product.id === id);
+
   products[productIndex].quantity = parseInt(quantity);
   localStorage.setItem("products", JSON.stringify(products));
   const itemsDiv = document.querySelector("#itemsDiv");
