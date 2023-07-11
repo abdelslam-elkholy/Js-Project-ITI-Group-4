@@ -1,5 +1,6 @@
 "use strict";
 //Search
+
 const searchProducts = async () => {
   const searchValue = document.querySelector(".inpt-search").value;
   const dropDown = document.querySelector(".dropdown-content");
